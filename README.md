@@ -102,21 +102,21 @@ CREATE INDEX IF NOT EXISTS idx_issues_severity ON issues (severity);
 ## Tech choices
 
 **Framework — Express**
-Simple, minimal, and widely understood. No magic — just routes and middleware. For a project this size it's the right call. If the product grew significantly, I'd consider Fastify for better performance and built-in validation.
+The goal was to use the most minimal framework that fits the project, nothing more than what's needed. Express is widely adopted, well understood, and simple.
 
 **Database — SQLite (via better-sqlite3)**
-No setup, no separate process, the DB is just a file. Perfect for a self-contained assignment or a single-server deployment. If this went to production with multiple servers or heavy write load, I'd move to PostgreSQL on RDS.
+SQLite requires no setup, the database is just a file on disk, no separate process to run or configure. For a production environment, I would switch to PostgreSQL or MySQL.
 
 **Frontend — React + Vite**
-React is the practical standard for building interactive UIs. Vite makes the dev/build experience fast and simple. The built output is just static files served directly by the Express server — no separate hosting needed. For a larger product I'd add a router (React Router) and a proper component library.
+React is the standard choice for building interactive UIs, and Vite keeps the dev and build experience fast with minimal configuration. The output is static files served directly by Express, no separate hosting needed.
 
 ---
 
 ## Deployment
 
-The app is deployed on an AWS EC2 t2.micro instance (free tier) running Ubuntu. The server is managed by PM2 to keep it alive after disconnecting and auto-restart on reboot. The frontend is built into static files and served directly by the Express server — no separate hosting needed.
+The app is deployed on an AWS EC2 t2.micro instance (free tier) running Ubuntu. The server is managed by PM2 to keep it alive after disconnecting. The frontend is built into static files and served directly by the Express server.
 
-**Live URL:** http://16.171.21.28:3000
+**Live URL:** http://ec2-16-171-21-28.eu-north-1.compute.amazonaws.com:3000
 
 ---
 
